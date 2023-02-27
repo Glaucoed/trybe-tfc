@@ -28,10 +28,11 @@ describe('Teste de integração da teams', function () {
         "teamName": "Bahia"
       },
     ];
-    
-    const response = await chai.request(app).post('/teams').send(outputMock);
+
+    const response = await chai.request(app).get('/teams').send(outputMock);
 
     expect(response.status).to.be.equal(200);
 
-  })
+  });
+
 })
