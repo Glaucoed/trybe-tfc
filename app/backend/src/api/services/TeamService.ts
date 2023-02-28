@@ -3,8 +3,9 @@ import TeamModel from '../../database/models/TeamModel';
 import IServiceTeam from '../interfaces/IServiceTeam';
 import ITeam from '../interfaces/ITeam';
 
-class PostService implements IServiceTeam {
+class TeamService implements IServiceTeam {
   protected model: ModelStatic<TeamModel> = TeamModel;
+
   async readAll(): Promise<ITeam[]> {
     return this.model.findAll();
   }
@@ -15,4 +16,4 @@ class PostService implements IServiceTeam {
   }
 }
 
-export default PostService;
+export default TeamService;
