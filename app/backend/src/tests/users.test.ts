@@ -7,6 +7,7 @@ import { app } from '../app';
 
 import IToken from '../api/interfaces/IToken'
 import IUser from '../api/interfaces/IUser'
+import UserModel from '../database/models/UserModel';
 
 chai.use(chaiHttp);
 
@@ -28,6 +29,8 @@ describe('Teste de integração da rota users', function () {
     const tokenMock: IToken = {
       token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0NTI3MTg5fQ.XS_9AA82iNoiVaASi0NtJpqOQ_gHSHhxrpIdigiT-fc"
     }
+
+    sinon.stub(UserModel, 'findOne').resolves()
 
     const response = await chai.request(app).post('/login').send(inputMock);
 

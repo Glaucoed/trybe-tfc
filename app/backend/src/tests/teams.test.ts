@@ -5,7 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 
-import { Response } from 'superagent';
+import TeamModel from '../database/models/TeamModel';
 
 chai.use(chaiHttp);
 
@@ -18,6 +18,8 @@ describe('Teste de integração da teams', function () {
   });
 
   it('Deve retornar uma lista de times e o status 200 utilizando a rota /teams', async function () {
+
+
     const outputMock = [
       {
         "id": 1,
@@ -28,8 +30,9 @@ describe('Teste de integração da teams', function () {
         "teamName": "Bahia"
       },
     ];
+    sinon.stub(TeamModel, 'findAll').resolves(outputMock as TeamModel[])
 
-    const response = await chai.request(app).get('/teams').send(outputMock);
+    const response = await chai.request(app).get('/teams')
 
     expect(response.status).to.be.equal(200);
 
@@ -40,6 +43,8 @@ describe('Teste de integração da teams', function () {
       "id": 5,
       "teamName": "Cruzeiro"
     };
+
+    sinon.stub(TeamModel, 'findByPk').resolves(outputMock as TeamModel)
 
     const response = await chai.request(app).get('/teams/5').send(outputMock);
 
