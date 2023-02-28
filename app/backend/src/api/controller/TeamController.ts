@@ -12,6 +12,18 @@ class TeamController {
     const result = await this._service.readAll();
     return res.status(200).json(result);
   }
+
+  async findByTeam(req: Request, res: Response) {
+    const { id } = req.params;
+
+    console.log(id);
+
+    const result = await this._service.findByTeam(+id);
+
+    console.log(result);
+
+    return res.status(200).json(result);
+  }
 }
 
 export default TeamController;
