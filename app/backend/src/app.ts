@@ -11,7 +11,7 @@ class App {
 
     this.config();
 
-    // Não remover essa rota
+    //  Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.initRoutes();
     this.initMiddlewares();
@@ -36,11 +36,6 @@ class App {
 
   private initMiddlewares() {
     this.app.use(ErrorHandler.handle);
-    process.on('uncaughtException', (err) => {
-      console.error('Erro não tratado:', err);
-      // Encerrar o processo Node.js com um código de erro
-      process.exit(1);
-    });
   }
 
   public start(PORT: string | number):void {
