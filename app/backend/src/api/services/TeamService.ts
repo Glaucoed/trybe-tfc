@@ -11,7 +11,7 @@ class TeamService implements IServiceTeam {
   }
 
   async findByTeam(id: number): Promise<ITeam> {
-    const result = this.model.findByPk(id);
+    const result = await this.model.findByPk(id);
     return result as unknown as ITeam;
   }
 }

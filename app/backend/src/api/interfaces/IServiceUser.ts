@@ -1,5 +1,6 @@
+import IToken from './IToken';
 import IUser from './IUser';
 
 export default interface IServiceUser {
-  findOneUser(email: string, senha: string):Promise<IUser>
+  verifyLogin(userInput: IUser):Promise<IToken | IUser>
 }

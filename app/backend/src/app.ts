@@ -1,5 +1,7 @@
 import * as express from 'express';
 import teamRouter from './routes/TeamRouter';
+import userRouter from './routes/UserRouter';
+import ErrorHandler from './api/middleware/ErrorHandler';
 
 class App {
   public app: express.Express;
@@ -12,6 +14,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.initRoutes();
+    this.initMiddlewares();
   }
 
   private config():void {
@@ -28,6 +31,16 @@ class App {
 
   private initRoutes(): void {
     this.app.use(teamRouter);
+    this.app.use(userRouter);
+  }
+
+  private initMiddlewares() {
+    this.app.use(ErrorHandler.handle);
+    process.on('uncaughtException', (err) => {
+      console.error('Erro não tratado:', err);
+      // Encerrar o processo Node.js com um código de erro
+      process.exit(1);
+    });
   }
 
   public start(PORT: string | number):void {

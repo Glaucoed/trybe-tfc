@@ -20,8 +20,6 @@ class TeamController {
 
     const result = await this._service.findByTeam(+id);
 
-    console.log(result);
-
     return res.status(200).json(result);
   }
 }
