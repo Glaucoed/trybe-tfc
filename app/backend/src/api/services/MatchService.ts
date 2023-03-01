@@ -10,9 +10,19 @@ class MatchService implements IServiceMatch {
   async readAll(): Promise<IMatch[]> {
     return this.model.findAll({
       include: [
-        { model: TeamModel, as: 'homeTeam' },
-        { model: TeamModel, as: 'awayTeam' },
+        { model: TeamModel, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: TeamModel, as: 'awayTeam', attributes: { exclude: ['id'] } },
       ],
+    });
+  }
+
+  async readAllTrueOrFalse(inProgress: boolean): Promise<IMatch[]> {
+    return this.model.findAll({
+      include: [
+        { model: TeamModel, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: TeamModel, as: 'awayTeam', attributes: { exclude: ['id'] } },
+      ],
+      where: { inProgress },
     });
   }
 }
