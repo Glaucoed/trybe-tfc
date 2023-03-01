@@ -60,7 +60,7 @@ describe('Teste de integração da rota /users/role', function () {
     sinon.restore();
   });
 
-  it('Não deve realizar o login sem um autorization e retornar um 401', async function () {
+  it('Deve realizar o login e retornar um status 200', async function () {
 
     const responseLogin = await chai.request(app).post('/login').send(validInputMock);
     
@@ -71,7 +71,5 @@ describe('Teste de integração da rota /users/role', function () {
     const responseRole = await chai.request(app).get('/login/role').set('authorization',token).send(validInputMock);
     expect(responseRole.status).to.be.equal(200);
   });
-
-
 
 })
