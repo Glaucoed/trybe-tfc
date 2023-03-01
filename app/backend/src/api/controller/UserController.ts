@@ -16,6 +16,12 @@ class UserController {
       next(error);
     }
   }
+
+  async getRole(req: Request, res: Response) {
+    const { email } = req.body;
+    const role = await this._service.getRole(email);
+    return res.status(200).json(role);
+  }
 }
 
 export default UserController;

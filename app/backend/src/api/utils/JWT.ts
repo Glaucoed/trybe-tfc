@@ -1,15 +1,12 @@
 import * as jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 interface ITokenPayload {
   email: string;
 }
 
 class JWTService {
-  private _secret: string;
-
-  constructor(secret: string) {
-    this._secret = secret;
-  }
+  private _secret = process.env.JWT_SECRET as string;
 
   generateToken(payload: ITokenPayload): string {
     const config: jwt.SignOptions = {
