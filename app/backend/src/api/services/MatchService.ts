@@ -49,16 +49,7 @@ class MatchService implements IServiceMatch {
         'It is not possible to create a match with two equal teams',
       );
     }
-    const newMatch = await this.model.create({ ...dto });
-
-    return {
-      id: newMatch.id,
-      homeTeamId: newMatch.homeTeamId,
-      homeTeamGoals: newMatch.homeTeamGoals,
-      awayTeamId: newMatch.awayTeamId,
-      awayTeamGoals: newMatch.awayTeamGoals,
-      inProgress: newMatch.inProgress as boolean,
-    };
+    return this.model.create({ ...dto, inProgress: true });
   }
 }
 
