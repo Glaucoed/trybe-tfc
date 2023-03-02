@@ -13,7 +13,7 @@ class authToken {
 
     try {
       const decoded = jwtService.verifyToken(authHeader);
-      req.body = decoded;
+      req.body.token = decoded;
       return next();
     } catch (err) {
       return res.status(401).json({ message: 'Token must be a valid token' });
