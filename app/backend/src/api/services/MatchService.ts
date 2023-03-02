@@ -2,6 +2,7 @@ import { ModelStatic } from 'sequelize';
 import TeamModel from '../../database/models/TeamModel';
 import MatchesModel from '../../database/models/MatchesModel';
 import IMatch from '../interfaces/IMatch';
+import IFinish from '../interfaces/IFinish';
 import IServiceMatch from '../interfaces/IServiceMatch';
 
 class MatchService implements IServiceMatch {
@@ -24,6 +25,11 @@ class MatchService implements IServiceMatch {
       ],
       where: { inProgress },
     });
+  }
+
+  async updateFinish(id: number): Promise<IFinish> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+    return { message: 'Testes' };
   }
 }
 
