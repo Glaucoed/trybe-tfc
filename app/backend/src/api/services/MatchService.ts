@@ -4,6 +4,8 @@ import MatchesModel from '../../database/models/MatchesModel';
 import IMatch from '../interfaces/IMatch';
 import IServiceMatch from '../interfaces/IServiceMatch';
 import IGols from '../interfaces/IGols';
+import UnprocessableContentError from '../errors/UnprocessableContentError';
+import NotFoundError from '../errors/NotFoundError';
 
 class MatchService implements IServiceMatch {
   protected model: ModelStatic<MatchesModel> = MatchesModel;
@@ -37,6 +39,16 @@ class MatchService implements IServiceMatch {
   }
 
   async insertMatch(dto: IMatch): Promise<IMatch> {
+    const homeTeam = await this.model.findByPk(dto.homeTeamId);
+    const awayTeam = await this.model.findByPk(dto.awayTeamId);
+
+    if (!homeTeam || !awayTeam) throw new NotFoundError('There is no team with such id!');
+
+    if (dto.homeTeamId === dto.awayTeamId) {
+      throw new UnprocessableContentError(
+        'It is not possible to create a match with two equal teams',
+      );
+    }
     const newMatch = await this.model.create({ ...dto });
 
     return {

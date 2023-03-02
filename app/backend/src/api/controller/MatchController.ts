@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import IServiceMatch from '../interfaces/IServiceMatch';
 
 class MatchController {
@@ -32,9 +32,13 @@ class MatchController {
     return res.status(200).json({ message: 'Finished' });
   }
 
-  async insertMatch(req: Request, res: Response) {
-    const result = await this._service.insertMatch({ ...req.body });
-    return res.status(201).json(result);
+  async insertMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await this._service.insertMatch({ ...req.body });
+      return res.status(201).json(result);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

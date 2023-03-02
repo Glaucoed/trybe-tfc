@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import authToken from '../api/middleware/authToken';
 import MatchController from '../api/controller/MatchController';
 import MatchService from '../api/services/MatchService';
@@ -23,7 +23,7 @@ matchRouter.patch(
 matchRouter.post(
   '/matches',
   authToken.authenticate,
-  (req: Request, res: Response) => matchController.insertMatch(req, res),
+  (req: Request, res: Response, next: NextFunction) => matchController.insertMatch(req, res, next),
 );
 
 export default matchRouter;
