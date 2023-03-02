@@ -31,6 +31,11 @@ class MatchController {
     await this._service.updateGoals(+id, { ...req.body });
     return res.status(200).json({ message: 'Finished' });
   }
+
+  async insertMatch(req: Request, res: Response) {
+    const result = await this._service.insertMatch({ ...req.body });
+    return res.status(201).json(result);
+  }
 }
 
 export default MatchController;

@@ -35,6 +35,19 @@ class MatchService implements IServiceMatch {
     const { homeTeamGoals, awayTeamGoals } = dto;
     await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   }
+
+  async insertMatch(dto: IMatch): Promise<IMatch> {
+    const newMatch = await this.model.create({ ...dto });
+
+    return {
+      id: newMatch.id,
+      homeTeamId: newMatch.homeTeamId,
+      homeTeamGoals: newMatch.homeTeamGoals,
+      awayTeamId: newMatch.awayTeamId,
+      awayTeamGoals: newMatch.awayTeamGoals,
+      inProgress: newMatch.inProgress as boolean,
+    };
+  }
 }
 
 export default MatchService;

@@ -6,4 +6,5 @@ export default interface IServiceUser {
   readAllTrueOrFalse(inProgress: boolean): Promise<IMatch[]>
   updateFinish(id: number): Promise<void>
   updateGoals(id: number, dto: IGols): Promise<void>
+  insertMatch(dto: IMatch): Promise<IMatch>
 }

@@ -36,7 +36,8 @@ MatchesModel.init(
       type: INTEGER,
     },
     inProgress: {
-      allowNull: false,
+      allowNull: true,
+      defaultValue: true,
       type: BOOLEAN,
     },
   },
