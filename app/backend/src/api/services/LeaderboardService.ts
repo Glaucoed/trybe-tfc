@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { col, fn, literal, ModelStatic } from 'sequelize';
 import TeamModel from '../../database/models/TeamModel';
 import MatchesModel from '../../database/models/MatchesModel';
