@@ -10,6 +10,7 @@ class LeaderboardController {
 
   async homeScore(_req: Request, res: Response) {
     const data = await this._service.homeScore();
+
     res.status(200).json(data);
   }
 }
