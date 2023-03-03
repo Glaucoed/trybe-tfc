@@ -9,7 +9,7 @@ const leaderboardController = new LeaderboardController(leaderboardService);
 
 leaderboardRouter.get(
   '/leaderboard/home',
-  (req: Request, res: Response) => leaderboardController.allScore(req, res),
+  (req: Request, res: Response) => leaderboardController.homeScore(req, res),
 );
 
 export default leaderboardRouter;
