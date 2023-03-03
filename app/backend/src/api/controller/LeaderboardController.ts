@@ -13,6 +13,12 @@ class LeaderboardController {
 
     res.status(200).json(data);
   }
+
+  async awayScore(_req: Request, res: Response) {
+    const data = await this._service.awayScore();
+
+    res.status(200).json(data);
+  }
 }
 
 export default LeaderboardController;
