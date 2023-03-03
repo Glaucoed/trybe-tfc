@@ -9,11 +9,11 @@ const leaderboardController = new LeaderboardController(leaderboardService);
 
 leaderboardRouter.get(
   '/leaderboard/home',
-  (req: Request, res: Response) => leaderboardController.homeScore(req, res),
+  (req: Request, res: Response) => leaderboardController.LeaderboardScoreHomeAndAway(req, res),
 );
 leaderboardRouter.get(
   '/leaderboard/away',
-  (req: Request, res: Response) => leaderboardController.homeScore(req, res),
+  (req: Request, res: Response) => leaderboardController.LeaderboardScoreHomeAndAway(req, res),
 );
 
 export default leaderboardRouter;
