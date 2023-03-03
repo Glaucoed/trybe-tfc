@@ -8,17 +8,18 @@ class LeaderboardController {
     this._service = service;
   }
 
-  async homeScore(_req: Request, res: Response) {
-    const data = await this._service.homeScore();
+  async homeScore(req: Request, res: Response) {
+    const endpointTeam = req.route.path.split('/')[2];
+    const data = await this._service.LeaderboardScoreHomeAndAway(endpointTeam);
 
     res.status(200).json(data);
   }
 
-  async awayScore(_req: Request, res: Response) {
-    const data = await this._service.awayScore();
+  // async awayScore(_req: Request, res: Response) {
+  //   const data = await this._service.awayScore();
 
-    res.status(200).json(data);
-  }
+  //   res.status(200).json(data);
+  // }
 }
 
 export default LeaderboardController;
